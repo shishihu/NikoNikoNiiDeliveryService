@@ -39,7 +39,7 @@ class Cli {
 	}
 
 	private static String[] getCuisines() {
-		return new String[]{"joe", "biden", "niko", "ni"};
+		return new String[]{"joe", "biden", "niko", "nii"};
 	}
 
 	private static String[] getRestaurants(String cuisine) {
