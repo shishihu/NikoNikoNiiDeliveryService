@@ -11,7 +11,7 @@ public class Restaurants{
 
     String getCuisine(){
         return cuisine;
-        }
+    }
 }
 
 
