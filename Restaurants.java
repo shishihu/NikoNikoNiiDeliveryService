@@ -1,14 +1,17 @@
-public interface Restaurants{
-    public int cost;
-    public List<String> menuItems;
-    public String cuisine;
-    public int getCost(){
-        return cost;
+import java.util.List;
+
+public class Restaurants{
+    protected String cuisine = null;
+    int getCost(){
+        return 0;
     }
     public List<String> getMenuItems(){
-        return menuItems;
+        return List.of("");
     }
-    public getCuisine(){
+
+    String getCuisine(){
         return cuisine;
         }
 }
+
+
