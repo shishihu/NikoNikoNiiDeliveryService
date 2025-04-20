@@ -7,48 +7,58 @@ class Cli {
 	private static ChainHandler clientHandler;
 
 	public static void main(String[] args) {
+		createChainOfCommand();
+		Scanner in = new Scanner(System.in);
+
+		List<Restaurants> restaurants = clientHandler.getRestaurants();
+		System.out.println("Select a restaurant: ");
+		int restaurantIndex = makeSelection(restaurants, in);
+		Restaurants chosenResaurant = restaurants.get(restaurantIndex);
+
+		List<Food> menu = clientHandler.getMenu(chosenResaurant);
+		System.out.println("Select a menu item: ");
+		int menuIndex = makeSelection(menu, in);
+		Food chosenOrder = menu.get(menuIndex);
+
+		in.close();
+	}
+
+	private static int makeSelection(List<? extends NamedObject> list, Scanner in) {
+		List<String> names = new ArrayList<String>();
+		for (NamedObject o : list) {
+			names.add(o.getName());
+		}
+
+		for (int i = 0; i < names.size(); i++) {
+			// This uses ANSII color codes
+			// Set number bold, then reset
+			System.out.println("\t\033[1;37m" + (i + 1) + ":\033[0m " + names.get(i));
+		}
+
+		int index = -1;
+		while (index == -1) {
+			String selection = in.nextLine();
+			try {
+				index = Integer.valueOf(selection) - 1;
+				if (index < 0 || index >= list.size()) {
+					System.out.println("Invalid selection. Try again.");
+					index = -1;
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Just enter the number. Try again.");
+			}
+		}
+		System.out.println("User selected " + names.get(index));
+		return index;
+	}
+
+	private static void createChainOfCommand() {
 		clientHandler = new ClientHandler();
 		ChainHandler serverHandler = new ServerHandler();
 		ChainHandler restaurantHandler = new RestaurantHandler();
 
 		clientHandler.setNext(serverHandler);
 		serverHandler.setNext(restaurantHandler);
-
-		Scanner in = new Scanner(System.in);
-
-		List<Restaurants> restaurants = clientHandler.getRestaurants();
-		List<String> restaurantNames = new ArrayList<String>();
-		for (Restaurants r : restaurants) {
-			restaurantNames.add(r.getName());
-		}
-		System.out.println("Select a restaurant: ");
-		int restaurantIndex = makeSelection(restaurantNames, in);
-		System.out.println("User selected " + restaurantNames.get(restaurantIndex));
-
-		in.close();
-	}
-
-	private static int makeSelection(List<String> list, Scanner in) {
-		for (int i = 0; i < list.size(); i++) {
-			// This uses ANSII color codes
-			// Set number bold, then reset
-			System.out.println("\t\033[1;37m" + (i + 1) + ":\033[0m " + list.get(i));
-		}
-
-		int index = 0;
-		while (index == 0) {
-			String selection = in.nextLine();
-			try {
-				index = Integer.valueOf(selection) - 1;
-				if (index < 0 || index >= list.size()) {
-					System.out.println("Invalid selection. Try again.");
-					index = 0;
-				}
-			} catch (NumberFormatException e) {
-				System.out.println("Just enter the number. Try again.");
-			}
-		}
-		return index;
 	}
 
 	private static List<String> getCuisines() {

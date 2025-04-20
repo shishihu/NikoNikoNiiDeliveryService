@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Restaurants{
+public class Restaurants implements NamedObject{
     protected String cuisine = null;
 	protected String name = null;
 

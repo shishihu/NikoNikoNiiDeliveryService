@@ -10,6 +10,10 @@ public class MysticForkAndSpoon extends Restaurants {
 
     private int cost = 0;
 
+	public MysticForkAndSpoon() {
+		name = "Mystic Fork and Spoon";
+	}
+
     private void addItemCost(List<String> addedItems){
         for (String addedItem : addedItems) {
             this.cost += costs.get(menu.indexOf(addedItem));
