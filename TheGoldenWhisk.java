@@ -4,9 +4,19 @@ import java.util.List;
 public class TheGoldenWhisk extends Restaurants {
     String cuisine = "Chinese";
     int cost = 0;
-    private List<String> menu = Arrays.asList("Spring Rolls", "Dumplings", "Crab Rangoon",
-            "Sweet and Sour Chicken", "Kung Pao Pork", "Beef with Broccoli", "General Tso's Chicken");
+
+	public TheGoldenWhisk() {
+		name = "The Golden Whisk";
+	}
+
+    // private List<String> menu = Arrays.asList("Spring Rolls", "Dumplings", "Crab Rangoon",
+    //        "Sweet and Sour Chicken", "Kung Pao Pork", "Beef with Broccoli", "General Tso's Chicken");
+	private List<Food> menu = Arrays.asList(
+		new Food("Banana", 1)
+	);
+
     private List<Double> costs = Arrays.asList(5.0, 10.0, 3.0, 5.0, 6.0, 7.0, 5.0);
+
     private void addItemCost(List<String> addedItems){
         for (String addedItem : addedItems) {
             this.cost += costs.get(menu.indexOf(addedItem));
@@ -21,8 +31,9 @@ public class TheGoldenWhisk extends Restaurants {
     public String getCuisine(){
         return "Chinese";
     }
+
     @Override
-    public List<String> getMenuItems() {
+    public List<Food> getMenuItems() {
         return menu;
     }
 }

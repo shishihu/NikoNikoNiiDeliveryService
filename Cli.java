@@ -4,43 +4,82 @@ import java.util.List;
 import java.util.ArrayList;
 
 class Cli {
+	private static ChainHandler clientHandler;
+
 	public static void main(String[] args) {
+		createChainOfCommand();
 		Scanner in = new Scanner(System.in);
 
-		System.out.println("Select a cuisine: ");
-		List<String> cuisines = getCuisines();
-		int cuisineIndex = makeSelection(cuisines, in);
-		System.out.println("User selected " + cuisines.get(cuisineIndex));
-
-		List<String> restaurants = getRestaurants(cuisines.get(cuisineIndex));
+		List<Restaurants> restaurants = clientHandler.getRestaurants();
 		System.out.println("Select a restaurant: ");
 		int restaurantIndex = makeSelection(restaurants, in);
-		System.out.println("User selected " + restaurants.get(restaurantIndex));
+		Restaurants chosenResaurant = restaurants.get(restaurantIndex);
+
+		List<Food> menu = clientHandler.getMenu(chosenResaurant);
+		System.out.println("Select a menu item: ");
+		int menuIndex = makeSelection(menu, in);
+		Food chosenOrder = menu.get(menuIndex);
+
+		List<Food> chosenOrderList = Arrays.asList(chosenOrder);
+
+		OrderType orderType = chooseOrderType(in, chosenResaurant, chosenOrderList);
+		clientHandler.sendOrder(orderType);
 
 		in.close();
 	}
 
-	private static int makeSelection(List<String> list, Scanner in) {
-		for (int i = 0; i < list.size(); i++) {
+	private static OrderType chooseOrderType(Scanner in, Restaurants restaurant, List<Food> order) {
+		System.out.println("Select an order type: ");
+		List<String> names = Arrays.asList("Delivery", "Pick Up");
+		int index = makeNamedSelection(names, in);
+		if (index == 0) {
+			return new DeliveryCreator().createOrder(restaurant, order);
+		}
+		else {
+			return new PickUpCreator().createOrder(restaurant, order);
+		}
+	}
+
+	private static int makeNamedSelection(List<String> names, Scanner in) {
+		for (int i = 0; i < names.size(); i++) {
 			// This uses ANSII color codes
 			// Set number bold, then reset
-			System.out.println("\t\033[1;37m" + (i + 1) + ":\033[0m " + list.get(i));
+			System.out.println("\t\033[1;37m" + (i + 1) + ":\033[0m " + names.get(i));
 		}
 
-		int index = 0;
-		while (index == 0) {
+		int index = -1;
+		while (index == -1) {
 			String selection = in.nextLine();
 			try {
 				index = Integer.valueOf(selection) - 1;
-				if (index < 0 || index >= list.size()) {
+				if (index < 0 || index >= names.size()) {
 					System.out.println("Invalid selection. Try again.");
-					index = 0;
+					index = -1;
 				}
 			} catch (NumberFormatException e) {
 				System.out.println("Just enter the number. Try again.");
 			}
 		}
+		System.out.println("User selected " + names.get(index));
+		System.out.println();
 		return index;
+	}
+
+	private static int makeSelection(List<? extends NamedObject> list, Scanner in) {
+		List<String> names = new ArrayList<String>();
+		for (NamedObject o : list) {
+			names.add(o.getName());
+		}
+		return makeNamedSelection(names, in);
+	}
+
+	private static void createChainOfCommand() {
+		clientHandler = new ClientHandler();
+		ChainHandler serverHandler = new ServerHandler();
+		ChainHandler restaurantHandler = new RestaurantHandler();
+
+		clientHandler.setNext(serverHandler);
+		serverHandler.setNext(restaurantHandler);
 	}
 
 	private static List<String> getCuisines() {

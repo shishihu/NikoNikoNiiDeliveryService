@@ -1,10 +1,19 @@
-import java.util.List;
-
-public class Food {
+public class Food implements NamedObject {
+    private int cost;
     private String name;
-    public List<String> customizations;
 
-    public String getName(){
-        return this.getName();
+    public String getName() {
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+    public Food(String name, int cost) {
+        this.name = name;
+        this.cost = cost;
     }
 }
