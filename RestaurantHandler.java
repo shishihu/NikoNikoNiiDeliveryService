@@ -11,7 +11,7 @@ public class RestaurantHandler extends ChainHandler {
 		return restaurant.getMenuItems();
 	}
 
-	public Receipt sendOrder(Restaurants restaurant, List<Food> order) {
-		return restaurant.sendOrder(order);
+	public Receipt sendOrder(OrderType orderType) {
+		return orderType.placeOrder();
 	}
 }

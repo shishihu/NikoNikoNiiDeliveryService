@@ -20,15 +20,27 @@ class Cli {
 		int menuIndex = makeSelection(menu, in);
 		Food chosenOrder = menu.get(menuIndex);
 
+		List<Food> chosenOrderList = Arrays.asList(chosenOrder);
+
+		OrderType orderType = chooseOrderType(in, chosenResaurant, chosenOrderList);
+		clientHandler.sendOrder(orderType);
+
 		in.close();
 	}
 
-	private static int makeSelection(List<? extends NamedObject> list, Scanner in) {
-		List<String> names = new ArrayList<String>();
-		for (NamedObject o : list) {
-			names.add(o.getName());
+	private static OrderType chooseOrderType(Scanner in, Restaurants restaurant, List<Food> order) {
+		System.out.println("Select an order type: ");
+		List<String> names = Arrays.asList("Delivery", "Pick Up");
+		int index = makeNamedSelection(names, in);
+		if (index == 0) {
+			return new DeliveryCreator().createOrder(restaurant, order);
 		}
+		else {
+			return new PickUpCreator().createOrder(restaurant, order);
+		}
+	}
 
+	private static int makeNamedSelection(List<String> names, Scanner in) {
 		for (int i = 0; i < names.size(); i++) {
 			// This uses ANSII color codes
 			// Set number bold, then reset
@@ -40,7 +52,7 @@ class Cli {
 			String selection = in.nextLine();
 			try {
 				index = Integer.valueOf(selection) - 1;
-				if (index < 0 || index >= list.size()) {
+				if (index < 0 || index >= names.size()) {
 					System.out.println("Invalid selection. Try again.");
 					index = -1;
 				}
@@ -49,7 +61,16 @@ class Cli {
 			}
 		}
 		System.out.println("User selected " + names.get(index));
+		System.out.println();
 		return index;
+	}
+
+	private static int makeSelection(List<? extends NamedObject> list, Scanner in) {
+		List<String> names = new ArrayList<String>();
+		for (NamedObject o : list) {
+			names.add(o.getName());
+		}
+		return makeNamedSelection(names, in);
 	}
 
 	private static void createChainOfCommand() {

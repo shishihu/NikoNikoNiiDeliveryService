@@ -15,6 +15,6 @@ public abstract class ChainHandler {
 	public abstract List<Food> getMenu(Restaurants restaurant);
 
 	// Send order to restaurant
-	public abstract Receipt sendOrder(Restaurants restaurant, List<Food> order);
+	public abstract Receipt sendOrder(OrderType orderType);
 
 }

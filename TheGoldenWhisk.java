@@ -11,7 +11,9 @@ public class TheGoldenWhisk extends Restaurants {
 
     // private List<String> menu = Arrays.asList("Spring Rolls", "Dumplings", "Crab Rangoon",
     //        "Sweet and Sour Chicken", "Kung Pao Pork", "Beef with Broccoli", "General Tso's Chicken");
-	private List<Food> menu = Arrays.asList(new Food());
+	private List<Food> menu = Arrays.asList(
+		new Food("Banana", 1)
+	);
 
     private List<Double> costs = Arrays.asList(5.0, 10.0, 3.0, 5.0, 6.0, 7.0, 5.0);
 

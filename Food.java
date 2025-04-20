@@ -5,4 +5,9 @@ public class Food implements NamedObject {
 	public String getName() {
 		return name;
 	}
+
+	public Food(String name, int cost) {
+		this.name = name;
+		this.cost = cost;
+	}
 }

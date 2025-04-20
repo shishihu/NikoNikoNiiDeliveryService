@@ -4,7 +4,9 @@ import java.util.List;
 public class MysticForkAndSpoon extends Restaurants {
 
     // private List<String> menu = Arrays.asList("Basil and Herb Mushrooms", "Garlic Bread", "Tomato Basil Soup");
-	private List<Food> menu = Arrays.asList();
+	private List<Food> menu = Arrays.asList(
+		new Food("Buger", 15)
+	);
 
     private List<Double> costs = Arrays.asList(13.0, 3.0, 6.0);
 

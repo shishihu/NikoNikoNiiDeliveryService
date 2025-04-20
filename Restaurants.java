@@ -13,7 +13,7 @@ public class Restaurants implements NamedObject{
     }
 
     public List<Food> getMenuItems(){
-        return List.of(new Food());
+        return List.of(new Food("Place holder", 0));
     }
 
     String getCuisine(){

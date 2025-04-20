@@ -10,7 +10,7 @@ public class ServerHandler extends ChainHandler {
 		return next.getMenu(restaurant);
 	}
 
-	public Receipt sendOrder(Restaurants restaurant, List<Food> order) {
-		return next.sendOrder(restaurant, order);
+	public Receipt sendOrder(OrderType orderType) {
+		return next.sendOrder(orderType);
 	}
 }
