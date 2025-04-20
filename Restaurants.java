@@ -2,11 +2,18 @@ import java.util.List;
 
 public class Restaurants{
     protected String cuisine = null;
+	protected String name = null;
+
+	public String getName() {
+		return name;
+	}
+
     int getCost(){
         return 0;
     }
-    public List<String> getMenuItems(){
-        return List.of("");
+
+    public List<Food> getMenuItems(){
+        return List.of(new Food());
     }
 
     String getCuisine(){

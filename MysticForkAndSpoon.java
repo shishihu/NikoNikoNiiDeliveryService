@@ -3,7 +3,9 @@ import java.util.List;
 
 public class MysticForkAndSpoon extends Restaurants {
 
-    private List<String> menu = Arrays.asList("Basil and Herb Mushrooms", "Garlic Bread", "Tomato Basil Soup");
+    // private List<String> menu = Arrays.asList("Basil and Herb Mushrooms", "Garlic Bread", "Tomato Basil Soup");
+	private List<Food> menu = Arrays.asList();
+
     private List<Double> costs = Arrays.asList(13.0, 3.0, 6.0);
 
     private int cost = 0;
@@ -19,7 +21,7 @@ public class MysticForkAndSpoon extends Restaurants {
     }
 
     @Override
-    public List<String> getMenuItems() {
+    public List<Food> getMenuItems() {
         return menu;
     }
 }

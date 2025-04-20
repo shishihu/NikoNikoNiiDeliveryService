@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class RestaurantHandler extend ChainHandler {
+public class RestaurantHandler extends ChainHandler {
 	// This shouldn't ever be called
 	public List<Restaurants> getRestaurants() {
 		return next.getRestaurants();

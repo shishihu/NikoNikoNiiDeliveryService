@@ -4,18 +4,26 @@ import java.util.List;
 import java.util.ArrayList;
 
 class Cli {
+	private static ChainHandler clientHandler;
+
 	public static void main(String[] args) {
+		clientHandler = new ClientHandler();
+		ChainHandler serverHandler = new ServerHandler();
+		ChainHandler restaurantHandler = new RestaurantHandler();
+
+		clientHandler.setNext(serverHandler);
+		serverHandler.setNext(restaurantHandler);
+
 		Scanner in = new Scanner(System.in);
 
-		System.out.println("Select a cuisine: ");
-		List<String> cuisines = getCuisines();
-		int cuisineIndex = makeSelection(cuisines, in);
-		System.out.println("User selected " + cuisines.get(cuisineIndex));
-
-		List<String> restaurants = getRestaurants(cuisines.get(cuisineIndex));
+		List<Restaurants> restaurants = clientHandler.getRestaurants();
+		List<String> restaurantNames = new ArrayList<String>();
+		for (Restaurants r : restaurants) {
+			restaurantNames.add(r.getName());
+		}
 		System.out.println("Select a restaurant: ");
-		int restaurantIndex = makeSelection(restaurants, in);
-		System.out.println("User selected " + restaurants.get(restaurantIndex));
+		int restaurantIndex = makeSelection(restaurantNames, in);
+		System.out.println("User selected " + restaurantNames.get(restaurantIndex));
 
 		in.close();
 	}

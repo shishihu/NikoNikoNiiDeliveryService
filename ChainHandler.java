@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public abstract class ChainHandler {
 	ChainHandler next;
 
-	public void SetNext(ChainHandler n) {
+	public void setNext(ChainHandler n) {
 		this.next = n;
 	}
 
