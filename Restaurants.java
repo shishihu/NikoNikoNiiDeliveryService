@@ -12,6 +12,14 @@ public class Restaurants{
     String getCuisine(){
         return cuisine;
     }
+
+	Receipt sendOrder(List<Food> order) {
+		Receipt receipt = new Receipt(0, 30);
+		for (Food item : order) {
+			receipt.cost += item.cost;
+		}
+		return receipt;
+	}
 }
 
 
