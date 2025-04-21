@@ -1,20 +1,32 @@
 import java.util.Scanner;
 
-public class FoodCustomization extends Food{
-    public FoodCustomization(String name, int cost){
-        super(name, cost);
-        Scanner sf = new Scanner(System.in);
-        System.out.println("Would you like to customize your dish?");
-        String yesOrNo = sf.nextLine();
-        if (yesOrNo.charAt(0) == 'y') {
-            System.out.println("What customizations would you like?");
-            String cs = sf.nextLine();
-            String newName = getItemWithCustomizations(cs);
-            setName(newName);
-        }
-        System.out.println("You have ordered " + getName());
+public class FoodCustomization implements FoodI{
+	private String nameAddOn;
+	private int extraCost;
+	private FoodI wrappee;
+
+	public FoodCustomization(FoodI item) {
+		this.wrappee = item;
+		this.nameAddOn = "";
+		this.extraCost = 0;
+	}
+
+    public void modify(String customizations, int extraCost) {
+		this.nameAddOn = " + " + customizations;
+		this.extraCost = extraCost;
     }
-    public String getItemWithCustomizations(String customizations){
-        return getName() + " with " + customizations;
-    }
+
+	@Override
+	public String getName() {
+		return wrappee.getName() + nameAddOn;
+	}
+
+	@Override
+	public int getCost() {
+		return wrappee.getCost() + extraCost;
+	}
+
+	public void setName(String name) {
+		wrappee.setName(name);
+	}
 }

@@ -12,7 +12,7 @@ public abstract class ChainHandler {
 	public abstract List<Restaurants> getRestaurants();
 
 	// Get menu from restaurant
-	public abstract List<Food> getMenu(Restaurants restaurant);
+	public abstract List<FoodI> getMenu(Restaurants restaurant);
 
 	// Send order to restaurant
 	public abstract Receipt sendOrder(OrderType orderType);

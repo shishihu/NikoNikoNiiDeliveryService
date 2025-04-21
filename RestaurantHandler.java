@@ -7,7 +7,7 @@ public class RestaurantHandler extends ChainHandler {
 		return next.getRestaurants();
 	}
 
-	public List<Food> getMenu(Restaurants restaurant) {
+	public List<FoodI> getMenu(Restaurants restaurant) {
 		return restaurant.getMenuItems();
 	}
 

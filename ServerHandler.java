@@ -6,7 +6,7 @@ public class ServerHandler extends ChainHandler {
 		return Server.getRestaurants();
 	}
 
-	public List<Food> getMenu(Restaurants restaurant) {
+	public List<FoodI> getMenu(Restaurants restaurant) {
 		return next.getMenu(restaurant);
 	}
 

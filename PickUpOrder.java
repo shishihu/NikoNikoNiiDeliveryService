@@ -2,9 +2,9 @@ import java.util.List;
 
 public class PickUpOrder implements OrderType {
 	private Restaurants restaurant;
-	private List<Food> order;
+	private List<FoodI> order;
 
-	public PickUpOrder(Restaurants restaurant, List<Food> order) {
+	public PickUpOrder(Restaurants restaurant, List<FoodI> order) {
 		this.restaurant = restaurant;
 		this.order = order;
 	}

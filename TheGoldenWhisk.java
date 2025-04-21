@@ -3,17 +3,16 @@ import java.util.List;
 
 public class TheGoldenWhisk extends Restaurants {
     String cuisine = "Chinese";
-    int cost = 0;
 
 	public TheGoldenWhisk() {
 		name = "The Golden Whisk";
+		menu = Arrays.asList(
+			new Food("Lo Mein", 5)
+		);
 	}
 
     // private List<String> menu = Arrays.asList("Spring Rolls", "Dumplings", "Crab Rangoon",
     //        "Sweet and Sour Chicken", "Kung Pao Pork", "Beef with Broccoli", "General Tso's Chicken");
-	private List<Food> menu = Arrays.asList(
-		new Food("Lo Mein", 5)
-	);
 
     private List<Double> costs = Arrays.asList(5.0, 10.0, 3.0, 5.0, 6.0, 7.0, 5.0);
 
@@ -24,16 +23,7 @@ public class TheGoldenWhisk extends Restaurants {
     }
 
     @Override
-    public int getCost() {
-        return cost;
-    }
-    @Override
     public String getCuisine(){
         return "Chinese";
-    }
-
-    @Override
-    public List<Food> getMenuItems() {
-        return menu;
     }
 }

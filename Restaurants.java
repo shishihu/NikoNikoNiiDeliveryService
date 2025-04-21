@@ -1,29 +1,28 @@
 import java.util.List;
+import java.util.Arrays;
 
 public class Restaurants implements NamedObject{
     protected String cuisine = null;
 	protected String name = null;
+	protected List<FoodI> menu = Arrays.asList(new Food("place holder", 0));
 
 	public String getName() {
 		return name;
 	}
 
-    int getCost(){
-        return 0;
-    }
 
-    public List<Food> getMenuItems(){
-        return List.of(new Food("Place holder", 0));
+    public List<FoodI> getMenuItems(){
+		return this.menu;
     }
 
     String getCuisine(){
         return cuisine;
     }
 
-	Receipt sendOrder(List<Food> order) {
+	Receipt sendOrder(List<FoodI> order) {
 		Receipt receipt = new Receipt(0, 30);
-		for (Food item : order) {
-			receipt.cost += item.cost;
+		for (FoodI item : order) {
+			receipt.cost += item.getCost();
 		}
 		return receipt;
 	}
