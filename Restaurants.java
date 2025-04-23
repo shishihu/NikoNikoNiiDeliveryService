@@ -21,7 +21,9 @@ public class Restaurants implements NamedObject{
 
 	Receipt sendOrder(List<FoodI> order) {
 		Receipt receipt = new Receipt(0, 30);
+
 		for (FoodI item : order) {
+
 			receipt.cost += item.getCost();
 		}
 		return receipt;
