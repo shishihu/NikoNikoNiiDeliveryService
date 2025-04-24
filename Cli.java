@@ -50,9 +50,10 @@ class Cli {
 		System.out.println();
 
 		OrderType orderType = chooseOrderType(in, chosenRestaurant, chosenOrderList);
-		Receipt reciept = clientHandler.sendOrder(orderType);
-		subtotal = reciept.cost;
+		Receipt receipt = clientHandler.sendOrder(orderType);
+		subtotal = receipt.cost;
 
+		System.out.println(orderType.name);
 		if (orderType.name == "Delivery") {
 			deliveryFee += 10;
 		}
