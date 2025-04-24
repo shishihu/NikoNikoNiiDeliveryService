@@ -13,10 +13,10 @@ class Cli {
 		List<Restaurants> restaurants = clientHandler.getRestaurants();
 		System.out.println("Select a restaurant: ");
 		int restaurantIndex = makeSelection(restaurants, in);
-		Restaurants chosenResaurant = restaurants.get(restaurantIndex);
+		Restaurants chosenRestaurant = restaurants.get(restaurantIndex);
 
 
-		List<FoodI> menu = clientHandler.getMenu(chosenResaurant);
+		List<FoodI> menu = clientHandler.getMenu(chosenRestaurant);
 		List<FoodI> chosenOrderList = new ArrayList<FoodI>();
 
 		List<FoodI> interactiveMenu = new ArrayList<FoodI>(menu);
@@ -43,7 +43,7 @@ class Cli {
 		prettyPrintList(orderNames);
 		System.out.println();
 
-		OrderType orderType = chooseOrderType(in, chosenResaurant, chosenOrderList);
+		OrderType orderType = chooseOrderType(in, chosenRestaurant, chosenOrderList);
 		clientHandler.sendOrder(orderType);
 
 		in.close();
