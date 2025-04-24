@@ -38,6 +38,7 @@ class Cli {
 			FoodI customOrder = customizeOrder(in, chosenOrder);
 			subtotal += customOrder.getCost();
 			chosenOrderList.add(customOrder);
+			new Logger(customOrder.getName(), customOrder.getCost());
 		}
 
 		System.out.println("Final order: ");
@@ -53,15 +54,15 @@ class Cli {
 		Receipt receipt = clientHandler.sendOrder(orderType);
 		subtotal = receipt.cost;
 
-		System.out.println(orderType.getName());
 		if (orderType.getName() == "Delivery") {
 			deliveryFee += 10;
 		}
 
+
 		System.out.println("Subtotal: $" + subtotal);
-		System.out.println("Tax: $" + (subtotal*taxPercentage));
+		System.out.println(String.format("Tax: $%.2f", subtotal*taxPercentage));
 		System.out.println("Delivery Fee: $" + deliveryFee);
-		System.out.println("Total: $" + (subtotal + subtotal*taxPercentage + deliveryFee));
+		System.out.println(String.format("Total: $%.2f", (subtotal + subtotal*taxPercentage + deliveryFee)));
 
 		in.close();
 	}
