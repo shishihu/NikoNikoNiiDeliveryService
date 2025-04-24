@@ -10,12 +10,15 @@ class Cli {
 		createChainOfCommand();
 		Scanner in = new Scanner(System.in);
 
+		double subtotal = 0;
+		double deliveryFee = 0;
+		double taxPercentage = .15;
 
 		List<Restaurants> restaurants = clientHandler.getRestaurants();
 		System.out.println("Select a restaurant: ");
 		int restaurantIndex = makeSelection(restaurants, in);
 		Restaurants chosenRestaurant = restaurants.get(restaurantIndex);
-		//new Logger(chosenRestaurant);
+		new Logger(chosenRestaurant.getName());
 		List<FoodI> menu = clientHandler.getMenu(chosenRestaurant);
 		List<FoodI> chosenOrderList = new ArrayList<FoodI>();
 
@@ -33,6 +36,7 @@ class Cli {
 			}
 			FoodI chosenOrder = interactiveMenu.get(menuIndex);
 			FoodI customOrder = customizeOrder(in, chosenOrder);
+			subtotal += customOrder.getCost();
 			chosenOrderList.add(customOrder);
 		}
 
@@ -41,13 +45,17 @@ class Cli {
 		for (NamedObject o : chosenOrderList) {
 			orderNames.add(o.getName());
 		}
-		new Logger(chosenRestaurant.getName());
+
 		prettyPrintList(orderNames);
 		System.out.println();
 
 		OrderType orderType = chooseOrderType(in, chosenRestaurant, chosenOrderList);
 		clientHandler.sendOrder(orderType);
 
+		System.out.println("Subtotal: $" + subtotal);
+		System.out.println("Tax: $" + (subtotal*taxPercentage));
+		System.out.println("Delivery Fee: $" + deliveryFee);
+		System.out.println("Total: $" + (subtotal + subtotal*taxPercentage + deliveryFee));
 
 		in.close();
 	}
@@ -66,8 +74,7 @@ class Cli {
 		else {
 			finalItem = item;
 		}
-        System.out.println("You have ordered " + finalItem.getName());
-		System.out.println();
+        System.out.println("You have ordered " + finalItem.getName() + "- " + "$" + finalItem.getCost() + "\n");
 		return finalItem;
     }
 
@@ -129,16 +136,4 @@ class Cli {
 		serverHandler.setNext(restaurantHandler);
 	}
 
-	private static List<String> getCuisines() {
-		List<String> c = Arrays.asList("joe", "biden", "niko", "nii");
-		return c;
-	}
-
-	private static List<String> getRestaurants(String cuisine) {
-		List<String> restaurants = new ArrayList<String>();
-		for (int i = 0; i < 10; i++) {
-			restaurants.add(Integer.toString(i));
-		}
-		return restaurants;
-	}
 }
