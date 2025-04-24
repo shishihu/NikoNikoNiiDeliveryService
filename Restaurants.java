@@ -4,6 +4,9 @@ import java.util.Arrays;
 public class Restaurants implements NamedObject{
     protected String cuisine = null;
 	protected String name = null;
+
+	int cost;
+
 	protected List<FoodI> menu = Arrays.asList(new Food("place holder", 0));
 
 	public String getName() {

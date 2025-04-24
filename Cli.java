@@ -10,14 +10,15 @@ class Cli {
 		createChainOfCommand();
 		Scanner in = new Scanner(System.in);
 
+
 		List<Restaurants> restaurants = clientHandler.getRestaurants();
 		System.out.println("Select a restaurant: ");
 		int restaurantIndex = makeSelection(restaurants, in);
 		Restaurants chosenRestaurant = restaurants.get(restaurantIndex);
-
-
+		//new Logger(chosenRestaurant);
 		List<FoodI> menu = clientHandler.getMenu(chosenRestaurant);
 		List<FoodI> chosenOrderList = new ArrayList<FoodI>();
+
 
 		List<FoodI> interactiveMenu = new ArrayList<FoodI>(menu);
 		FoodI exit_condition = new Food("Enter 1 to stop adding items to order", 0);
@@ -40,11 +41,13 @@ class Cli {
 		for (NamedObject o : chosenOrderList) {
 			orderNames.add(o.getName());
 		}
+		new Logger(chosenRestaurant.getName());
 		prettyPrintList(orderNames);
 		System.out.println();
 
 		OrderType orderType = chooseOrderType(in, chosenRestaurant, chosenOrderList);
 		clientHandler.sendOrder(orderType);
+
 
 		in.close();
 	}
