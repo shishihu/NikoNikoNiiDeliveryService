@@ -53,8 +53,8 @@ class Cli {
 		Receipt receipt = clientHandler.sendOrder(orderType);
 		subtotal = receipt.cost;
 
-		System.out.println(orderType.name);
-		if (orderType.name == "Delivery") {
+		System.out.println(orderType.getName());
+		if (orderType.getName() == "Delivery") {
 			deliveryFee += 10;
 		}
 

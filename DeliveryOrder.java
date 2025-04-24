@@ -5,6 +5,10 @@ public class DeliveryOrder implements OrderType {
 	private List<FoodI> order;
 	public String name = "Delivery";
 
+	public String getName() {
+		return name;
+	}
+
 	public DeliveryOrder(Restaurants restaurant, List<FoodI> order) {
 		this.restaurant = restaurant;
 		this.order = order;

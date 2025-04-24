@@ -5,6 +5,9 @@ public class PickUpOrder implements OrderType {
 	private List<FoodI> order;
 	public String name = "Pick up";
 
+	public String getName() {
+		return name;
+	}
 	public PickUpOrder(Restaurants restaurant, List<FoodI> order) {
 		this.restaurant = restaurant;
 		this.order = order;

@@ -1,7 +1,6 @@
 import java.util.List;
 
-public interface OrderType {
+public interface OrderType extends NamedObject {
 
-	public String name = null;
 	public Receipt placeOrder();
 }
