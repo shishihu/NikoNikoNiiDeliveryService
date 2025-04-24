@@ -6,12 +6,12 @@ class Logger {
     // get menu requests
     // orders and costs
     // text file
-    File myObj = new File("Log.txt");
+    static File myObj = new File("Log.txt");
 
     public Logger(String order, double cost){
         try{
-            FileWriter fw = new FileWriter("Log.txt");
-            fw.write(order + " -$" + cost);
+            FileWriter fw = new FileWriter("Log.txt", true);
+            fw.write(order + " -$" + cost + "\n");
             fw.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -20,7 +20,7 @@ class Logger {
     }
     public Logger(String restaurant){
         try{
-            FileWriter fw = new FileWriter("Log.txt");
+            FileWriter fw = new FileWriter("Log.txt", true);
             fw.write(restaurant + "'s menu was opened.\n");
             fw.close();
         } catch (IOException e) {
