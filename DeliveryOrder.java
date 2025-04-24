@@ -3,6 +3,7 @@ import java.util.List;
 public class DeliveryOrder implements OrderType {
 	private Restaurants restaurant;
 	private List<FoodI> order;
+	public String name = "Delivery";
 
 	public DeliveryOrder(Restaurants restaurant, List<FoodI> order) {
 		this.restaurant = restaurant;
