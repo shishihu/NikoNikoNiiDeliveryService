@@ -68,7 +68,7 @@ class Cli {
 
 	private static FoodI customizeOrder(Scanner in, FoodI item){
 		FoodI finalItem;
-        System.out.println("Would you like to customize your dish?");
+        System.out.println("Would you like to customize your dish? (y/n)");
         String yesOrNo = in.nextLine();
         if (yesOrNo.charAt(0) == 'y') {
             System.out.println("What customizations would you like?");
