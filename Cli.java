@@ -9,6 +9,7 @@ class Cli {
 	public static void main(String[] args) {
 		createChainOfCommand();
 		Scanner in = new Scanner(System.in);
+		Logger logger = Logger.getInstance();
 
 		double subtotal = 0;
 		double deliveryFee = 0;
@@ -18,7 +19,7 @@ class Cli {
 		System.out.println("Select a restaurant: ");
 		int restaurantIndex = makeSelection(restaurants, in);
 		Restaurants chosenRestaurant = restaurants.get(restaurantIndex);
-		new Logger(chosenRestaurant.getName());
+		logger.Log(chosenRestaurant.getName());
 		List<FoodI> menu = clientHandler.getMenu(chosenRestaurant);
 		List<FoodI> chosenOrderList = new ArrayList<FoodI>();
 
@@ -38,7 +39,7 @@ class Cli {
 			FoodI customOrder = customizeOrder(in, chosenOrder);
 			subtotal += customOrder.getCost();
 			chosenOrderList.add(customOrder);
-			new Logger(customOrder.getName(), customOrder.getCost());
+			logger.Log(customOrder.getName(), customOrder.getCost());
 		}
 
 		System.out.println("Final order: ");

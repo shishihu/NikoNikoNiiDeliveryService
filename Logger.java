@@ -7,8 +7,20 @@ class Logger {
     // orders and costs
     // text file
     static File myObj = new File("Log.txt");
+	private static Logger instance;
 
-    public Logger(String order, double cost){
+	public static Logger getInstance() {
+		if (instance == null) {
+			instance = new Logger();
+		}
+		return instance;
+	}
+
+	private Logger() {
+
+	}
+
+    public void Log(String order, double cost){
         try{
             FileWriter fw = new FileWriter("Log.txt", true);
             fw.write(order + " -$" + cost + "\n");
@@ -18,7 +30,7 @@ class Logger {
             e.printStackTrace();
         }
     }
-    public Logger(String restaurant){
+    public void Log(String restaurant){
         try{
             FileWriter fw = new FileWriter("Log.txt", true);
             fw.write(restaurant + "'s menu was opened.\n");
